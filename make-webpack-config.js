@@ -52,7 +52,7 @@ var makeWebpackConfig = function(opts) {
     config.module = {
         loaders: [{
             test: /\.js$/,
-            loader: 'babel-loader',
+            loader: 'babel-loader?stage=0',
             exclude: /node_modules/
         }, {
             test: /\.css$/,

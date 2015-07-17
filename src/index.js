@@ -1,4 +1,4 @@
-import cu from 'targetprocess-mashup-helper/lib/customUnits';
+import cu, {sizes} from 'targetprocess-mashup-helper/lib/customUnits';
 
 const id = 'customunit_last_comment';
 
@@ -19,7 +19,7 @@ const output = (text) => {
     return plain.replace(/\u00a0/g, " ");
 };
 
-cu.add({
+const base = {
     id: id,
     name: 'Last Comment',
     outerClassName: 'tau-board-unit_type_custom-rich-tex',
@@ -39,5 +39,12 @@ cu.add({
         comment: {
             description: 'Suspendisse consequat nisi et diam euismod, vel pulvinar massa laoreet. Nunc finibus et elit nec ultrices. Suspendisse consectetur tincidunt tortor, venenatis varius dolor.'
         }
+    }
+};
+
+cu.add({...base, id: `${id}_cards`, sizes: [sizes.XS, sizes.S, sizes.M, sizes.L, sizes.XL]});
+cu.add({...base, id: `${id}_list`, sizes: [sizes.LIST], template: {
+        markup: '<div class="tau-board-unit__value"><%= fn.output(this.data.comment.description) %>',
+        customFunctions: {output}
     }
 });
