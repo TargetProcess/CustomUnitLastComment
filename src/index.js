@@ -22,11 +22,11 @@ const output = (text) => {
 const base = {
     id: id,
     name: 'Last Comment',
-    outerClassName: 'tau-board-unit_type_custom-rich-tex',
+    outerClassName: 'tau-board-unit_type_custom-rich-text',
     alignment: 'base',
     sections: 1,
     template: {
-        markup: '<div class="tau-board-unit__value" style="white-space:normal"><%= fn.output(this.data.comment.description) %>',
+        markup: '<div class="tau-board-unit__value" style="white-space:normal"><%= fn.output(this.data.comment.description) %></div>',
         customFunctions: {output}
     },
     hideIf: function(data) {
@@ -44,7 +44,7 @@ const base = {
 
 cu.add({...base, id: `${id}_cards`, sizes: [sizes.XS, sizes.S, sizes.M, sizes.L, sizes.XL]});
 cu.add({...base, id: `${id}_list`, sizes: [sizes.LIST], template: {
-        markup: '<div class="tau-board-unit__value"><%= fn.output(this.data.comment.description) %>',
+        markup: '<div class="tau-board-unit__value"><%= fn.output(this.data.comment.description) %></div>',
         customFunctions: {output}
     }
 });
