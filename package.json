@@ -10,7 +10,8 @@
   "author": "Aliaksei Shytkin <shitkin@targetprocess.com>",
   "scripts": {
     "build": "webpack --output-path $TARGETPROCESS_MASHUPS_PATH/CustomUnitLastComment --watch",
-    "build-production": "rm -rf dist && webpack --config webpack-production.config.js && cp src/README.mkd dist"
+    "build-production": "rm -rf dist && webpack --config webpack-production.config.js",
+    "build-library": "rm -rf library && webpack --config webpack-library.config.js --output-path library && cp src/README.mkd library"
   },
   "licenses": [
     {
