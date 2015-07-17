@@ -1,6 +1,6 @@
 {
   "name": "targetprocess-mashup-webpack-boilerplate",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Webpack boilerplate to create Targetprocess mashup.",
   "keywords": [
     "webpack",
