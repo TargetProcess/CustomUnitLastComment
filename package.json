@@ -9,7 +9,7 @@
   ],
   "author": "Aliaksei Shytkin <shitkin@targetprocess.com>",
   "scripts": {
-    "build": "webpack --output-path $TARGETPROCESS_MASHUPS_PATH/CustomUnitLastComment --watch",
+    "start": "webpack --output-path $TARGETPROCESS_MASHUPS_PATH/CustomUnitLastComment --watch",
     "build-production": "rm -rf dist && webpack --config webpack-production.config.js",
     "build-library": "rm -rf library && webpack --config webpack-library.config.js --output-path library && cp src/README.mkd library"
   },
@@ -26,6 +26,7 @@
     "file-loader": "^0.8.4",
     "style-loader": "^0.12.3",
     "targetprocess-mashup-config-loader": "targetprocess/targetprocess-mashup-config-loader",
+    "targetprocess-mashup-helper": "^0.4.0",
     "targetprocess-mashup-manifest-loader": "targetprocess/targetprocess-mashup-manifest-loader",
     "targetprocess-mashup-webpack-plugin": "targetprocess/targetprocess-mashup-webpack-plugin",
     "webpack": "^1.9.10"
