@@ -1,17 +1,18 @@
 var path = require('path');
+
 var webpack = require('webpack');
 
-var pkg = require('./package.json');
+var pkg = require('../package.json');
 
 var TargetprocessMashupPlugin = require('targetprocess-mashup-webpack-plugin');
 var CombineAssetsPlugin = require('combine-assets-plugin');
 
-var makeWebpackConfig = function(opts) {
+var createConfig = function(opts) {
 
     opts = opts || {};
 
     // mashup unique name
-    opts.mashupName = opts.mashupName || __dirname.split(path.sep).pop();
+    opts.mashupName = opts.mashupName || pkg.name;
 
     // minimize output and prevent dev tools
     opts.production = opts.hasOwnProperty('production') ? opts.production : false;
@@ -25,14 +26,14 @@ var makeWebpackConfig = function(opts) {
     // config file
     var outputConfigFileName = './mashup.config.js';
 
-    var config = {};
-
-    config.entry = {
-        // process config js module from JSON file
-        configData: ['targetprocess-mashup-config?libraryTarget=' + mashupName
-            + '&outputFile=' + outputConfigFileName + '!./src/config.json'],
-        // main entry point
-        index: ['./src/index.js']
+    var config = {
+        entry: {
+            // process config js module from JSON file
+            configData: ['targetprocess-mashup-config?libraryTarget=' + mashupName +
+                '&outputFile=' + outputConfigFileName + '!./src/config.json'],
+            // main entry point
+            index: ['./src/index.js']
+        }
     };
 
     if (!opts.mashupManager) {
@@ -105,17 +106,27 @@ var makeWebpackConfig = function(opts) {
     if (opts.production) {
         config.plugins = config.plugins.concat(new webpack.optimize.UglifyJsPlugin({
             compress: {
+                properties: true,
+                screw_ie8: false,
                 warnings: false
+            },
+            output: {
+                screw_ie8: false
             }
         }));
     }
 
-    config.externals = [{
-        jquery: 'jQuery',
-        underscore: 'Underscore'
-    }, 'jQuery', 'Underscore', /^tp3\//, /^tau\//, /^tp\//];
+    config.externals = [
+        'jQuery',
+        {jquery: 'jQuery'},
+        'Underscore',
+        {underscore: 'Underscore'},
+        /^tp3\//,
+        /^tau\//,
+        /^tp\//
+    ];
 
     return config;
 };
 
-module.exports = makeWebpackConfig;
+module.exports = createConfig;
