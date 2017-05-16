@@ -3,20 +3,15 @@ import cu, {sizes} from 'targetprocess-mashup-helper/lib/customUnits';
 const id = 'customunit_last_comment';
 
 const output = (text) => {
-
-    const tmp = document.createElement("DIV");
-
+    const tmp = document.createElement('DIV');
     tmp.innerHTML = text;
 
-    let plain = tmp.textContent || tmp.innerText || "";
-
+    let plain = tmp.textContent || tmp.innerText || '';
     if (plain.length > 150) {
-
-        plain = plain.substring(0, 150) + "...";
-
+        plain = plain.substring(0, 150) + '...';
     }
 
-    return plain.replace(/\u00a0/g, " ");
+    return plain.replace(/\u00a0/g, ' ');
 };
 
 const base = {
@@ -43,7 +38,11 @@ const base = {
 };
 
 cu.add({...base, id: `${id}_cards`, sizes: [sizes.XS, sizes.S, sizes.M, sizes.L, sizes.XL]});
-cu.add({...base, id: `${id}_list`, sizes: [sizes.LIST], template: {
+cu.add({
+    ...base,
+    id: `${id}_list`,
+    sizes: [sizes.LIST],
+    template: {
         markup: '<div class="tau-board-unit__value"><%= fn.output(this.data.comment.description) %></div>',
         customFunctions: {output}
     }
